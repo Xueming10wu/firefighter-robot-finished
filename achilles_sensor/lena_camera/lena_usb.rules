@@ -1,0 +1,1 @@
+SUBSYSTEM=="usb", ATTR{idProduct}=="0568", ATTR{idVendor}=="1e4e", MODE:="666", OWNER:="root", GROUP:="video", SYMLINK+="lena_camera"

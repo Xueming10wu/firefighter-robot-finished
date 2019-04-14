@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<robot
+  name="tr10">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.028595 -0.045347 0.49115"
+        rpy="0 0 0" />
+      <mass
+        value="2.5724" />
+      <inertia
+        ixx="0.019685"
+        ixy="-6.7256E-06"
+        ixz="3.4386E-06"
+        iyy="0.037761"
+        iyz="-0.0018177"
+        izz="0.043941" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 -0.04 -0.42"
+        rpy="-1.57 0 -1.57" />
+      <geometry>
+        <mesh
+          filename="package://tr10_controller/model/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="-1.57 0 -1.57" />
+      <geometry>
+        <mesh
+          filename="package://tr10_controller/model/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

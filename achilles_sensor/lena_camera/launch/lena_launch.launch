@@ -1,0 +1,12 @@
+<launch>
+
+  <arg name="Lena_dev" default="/dev/video1" />
+  <!--如果错误，请把default="0"改为default="0"，-->
+  
+  <node name="lena_node" pkg="lena_camera" type="lena_ros">
+  <!--<node name="lena_node" pkg="lena_camera" type="lena_ros.py" output="screen">-->
+    
+    <!--或者直接在终端运行rosparam set /lena_node/Lena_dev 1 -->
+    <param name="Lena_dev" value="$(arg Lena_dev)" type="string"/>
+  </node>
+</launch>

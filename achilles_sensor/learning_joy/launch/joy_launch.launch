@@ -1,0 +1,27 @@
+<launch>
+
+ <!-- joy node -->
+  <node respawn="true" pkg="joy"
+        type="joy_node" name="joy_node" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.12" />
+  </node>
+
+ <!-- Axes -->
+  <param name="axis_linear" value="4" type="int"/>
+  <param name="axis_angular" value="3" type="int"/>
+  <param name="scale_linear" value="0.15" type="double"/>
+  <param name="scale_angular" value="0.35" type="double"/>
+ <!--Buttons-->
+  <param name="Y" value="3" type="int"/>
+  <param name="A" value="0" type="int"/>
+  <param name="X" value="1" type="int"/>
+  <param name="B" value="2" type="int"/>
+  <param name="start_button" value="7" type="int"/>
+  <param name="stop_button_" value="6" type="int"/>
+
+  <!--Topics-->
+  <param name="joy_cmd_vel" value="/cmd_vel" type="string"/>
+  
+  <node pkg="learning_joy" type="teleop_joy" name="teleop_joy" output="screen"/>
+</launch>
