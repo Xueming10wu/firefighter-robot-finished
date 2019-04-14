@@ -1,0 +1,1 @@
+flame_detection 和 flame_detection_train 不能够同时共存

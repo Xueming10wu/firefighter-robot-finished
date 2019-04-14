@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- camera-->
+    <include file="$(find lena_camera)/launch/lena_launch.launch">
+    </include>
+  
+  <!--flameDetection-->
+    <!--arg-->
+    <arg name="SVM_DATA_FILE" default="$(find flame_detection)/model/svmdata.xml"/>
+
+    <!--param-->
+    <param name="SVM_DATA_FILE" value="$(arg SVM_DATA_FILE)"/>
+    
+    <!--node-->
+    <node pkg="flame_detection" type="main" name="flameDetection" />
+
+</launch>

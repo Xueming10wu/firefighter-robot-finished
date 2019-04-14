@@ -1,0 +1,8 @@
+<launch>
+    <!--detection-->
+    <include file="$(find flame_detection)/launch/flameDetection.launch"></include>
+    
+    <!--三维空间点计算-->
+    <node name="space_node" pkg="flame_detection" type="3DPosition" output="screen"></node>
+    
+</launch>
