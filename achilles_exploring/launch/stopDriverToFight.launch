@@ -1,0 +1,5 @@
+<launch>
+    <arg name="stopDriveToFight" default="False" />
+    <param name="stopDriveToFight" value="$(arg stopDriveToFight)" type="bool" />
+    <node name="achilles_goals_node" pkg="achilles_exploring" type="achilles_goals.py" output="screen"/>
+</launch>

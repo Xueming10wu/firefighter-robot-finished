@@ -1,0 +1,6 @@
+#舵机编号 1~99
+uint32 ID
+#舵机角度 
+geometry_msgs/Vector3 angular
+---
+geometry_msgs/Vector3 angular

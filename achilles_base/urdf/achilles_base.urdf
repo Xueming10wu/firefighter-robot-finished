@@ -1,0 +1,391 @@
+<robot
+  name="achilles_base">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0015558 0.20342 0.096724"
+        rpy="0 0 1.57" />
+      <mass
+        value="3.0948" />
+      <inertia
+        ixx="0.089329"
+        ixy="-5.9771E-05"
+        ixz="1.6362E-05"
+        iyy="0.0043884"
+        iyz="-0.0037153"
+        izz="0.090345" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 1.57" />
+      <geometry>
+        <mesh
+          filename="package://achilles_base/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89412 0.91373 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 1.57" />
+      <geometry>
+        <mesh
+          filename="package://achilles_base/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+
+  <link
+    name="left_Link">
+    <inertial>
+      <origin
+        xyz="-2.7756E-17 3.1225E-17 0"
+        rpy="-1.57 0 0" />
+      <mass
+        value="0.094313" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="-1.57 0 0" />
+      <geometry>
+        <mesh
+          filename="package://achilles_base/meshes/left_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="-1.57 0 0" />
+      <geometry>
+        <mesh
+          filename="package://achilles_base/meshes/left_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wheel_left_joint"
+    type="continuous">
+    <origin
+      xyz="0.038 0.147  0.035"
+      rpy="0 6.123E-17 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_Link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+
+  <link
+    name="right_Link">
+    <inertial>
+      <origin
+        xyz="-2.7756E-17 3.1225E-17 0"
+        rpy="-1.57 0 0" />
+      <mass
+        value="0.094313" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="-1.57 0 0" />
+      <geometry>
+        <mesh
+          filename="package://achilles_base/meshes/left_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="-1.57 0 0" />
+      <geometry>
+        <mesh
+          filename="package://achilles_base/meshes/left_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wheel_right_joint"
+    type="continuous">
+    <origin
+      xyz="0.042 -0.147 0.035"
+      rpy="0 6.123E-17 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_Link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+  <link name="front_caster_link">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <sphere radius="0.015" />
+        </geometry>
+        <material name="black">
+            <color rgba="0 0 0 0.95"/>
+        </material>
+    </visual>
+  </link>
+
+  <joint name="front_caster_joint" type="continuous">
+      <origin xyz="0.25 0 -0.015" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="front_caster_link"/>
+      <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <link name="laser_link">
+		<visual>
+			<origin xyz=" 0 0 0 " rpy="0 0 0" />
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+      <material
+        name="black">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+		</visual>
+    </link>
+
+    <joint name="laser_joint" type="fixed">
+        <origin xyz="0 0 0.51" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="laser_link"/>
+    </joint>
+
+
+
+
+  <!-- Camera -->
+  <link name="camera_link">
+    <visual>
+        <origin xyz=" 0 0 0 " rpy="0 -1.57 0" />
+        <geometry>
+            <box size="0.01 0.24 0.04" />
+        </geometry>
+        <material
+          name="black">
+          <color
+            rgba="0 0 0 1" />
+        </material>
+    </visual>
+    <collision>
+        <origin xyz=" 0 0 0 " rpy="0 0 0" />
+        <geometry>
+            <box size="0.01 0.24 0.04" />
+        </geometry>
+    </collision>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+      <origin xyz="0.3 0 0.4" rpy="0 1.57 0" />
+      <parent link="base_link"/>
+      <child link="camera_link"/>
+  </joint>
+
+  <!--left_camera-->
+  <link name="left_camera_link">
+  <visual>
+      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.01" radius="0.005"/>
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0 1 1 1" />
+      </material>
+  </visual>
+  <collision>
+      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.01" radius="0.005"/>
+      </geometry>
+  </collision>
+  </link>
+
+  <joint name="left_camera_joint" type="fixed">
+    <origin xyz="0 0.1 0.001" rpy="0 0 -1.57" />
+    <parent link="camera_link"/>
+    <child link="left_camera_link"/>
+  </joint>
+
+
+  <!--right_camera-->
+  <link name="right_camera_link">
+  <visual>
+      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.01" radius="0.005"/>
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0 1 1 1" />
+      </material>
+  </visual>
+  <collision>
+      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.01" radius="0.005"/>
+      </geometry>
+  </collision>
+  </link>
+
+  <joint name="right_camera_joint" type="fixed">
+    <origin xyz="0 -0.1 0.001" rpy="0 0 -1.57" />
+    <parent link="camera_link"/>
+    <child link="right_camera_link"/>
+  </joint>
+
+
+  <!--servo -->
+  <link name="pzt_link">
+  <visual>
+      <origin xyz=" 0 0 0.015 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0 1 1 1" />
+      </material>
+  </visual>
+  <collision>
+      <origin xyz=" 0 0 0.015 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.001" radius="0.05"/>
+      </geometry>
+  </collision>
+  </link>
+
+  <joint name="pzt_link_joint" type="fixed">
+    <origin xyz="0.35 0 0.175" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="pzt_link"/>
+  </joint>
+
+
+  <link name="servo_1_link">
+  <visual>
+      <origin xyz=" 0 0 0.015 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0 1 1 1" />
+      </material>
+  </visual>
+  <collision>
+      <origin xyz=" 0 0 0.015 " rpy="0 0 0" />
+      <geometry>
+          <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+  </collision>
+  </link>
+
+  <joint name="servo_1_joint" type="revolute">
+    <origin xyz="0.35 0 0.175" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="servo_1_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.5"/>
+  </joint>
+
+  <link name="servo_2_link">
+  <visual>
+      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <geometry>
+          <sphere radius="0.025" />
+      </geometry>
+      <material
+        name="blue">
+        <color
+          rgba="0 1 1 1" />
+      </material>
+  </visual>
+  <collision>
+      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <geometry>
+          <sphere radius="0.025" />
+      </geometry>
+  </collision>
+  </link>
+
+  <joint name="servo_2_joint" type="revolute">
+    <origin xyz="0 0 0.04" rpy="0 0 0" />
+    <parent link="servo_1_link"/>
+    <child link="servo_2_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.5"/>
+  </joint>
+
+
+  <link name="gun_link">
+  <visual>
+      <origin xyz=" 0.25 0 0 " rpy="0 1.57 0" />
+      <geometry>
+          <cylinder length="0.1" radius="0.005"/>
+      </geometry>
+      <material
+        name="yellow">
+        <color
+          rgba="1 1 0 1" />
+      </material>
+  </visual>
+  <collision>
+      <origin xyz=" 0.25 0 0 " rpy="0 1.57 0" />
+      <geometry>
+          <cylinder length="0.1" radius="0.005"/>
+      </geometry>
+  </collision>
+  </link>
+
+  <joint name="gun_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="servo_2_link"/>
+    <child link="gun_link"/>
+  </joint>
+    
+</robot>

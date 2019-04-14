@@ -1,0 +1,109 @@
+<launch>
+    <!--EAI激光雷达驱动-->
+    <include file="$(find ydlidar)/launch/lidar.launch"/>
+
+    <!--lena双目摄像机驱动-->
+    <arg name="Lena_dev" default="/dev/video0" />
+    <node name="lena_node" pkg="lena_camera" type="lena_ros">
+        <param name="Lena_dev" value="$(arg Lena_dev)" type="string"/>
+    </node>
+    
+    
+    <!--arduino舵机控制装置驱动-->
+    <node name="achilles_node" pkg="serial" type="achilles_node.py"/>
+    
+    <!--TR10底盘驱动-->
+    <!--tf树以及维护-->
+    <include file="$(find achilles_base)/launch/display.launch"/>
+    <arg name="serialport_name" default="/dev/motor_trd" />
+    <arg name="baudrate" default="38400"/>
+    <arg name="left_coef" default="1.0" />
+    <arg name="right_coef" default="1.0" />
+    <arg name="linear_coef" default="82.0" />
+    <arg name="angular_coef" default="14.64" />
+    <arg name="encoder_ticks_per_rev" default="1600" />
+    <arg name="base_width" default="0.39" />
+    <arg name="wheel_diameter" default="0.125" />
+
+    <node pkg="tr10_controller" type="trd_diff_controller_node" name="trd_diff_controller_node">
+        <param name="serialport_name" value="$(arg serialport_name)"/>
+        <param name="baudrate" value="$(arg baudrate)"/>
+        <param name="left_coef" value="$(arg left_coef)" />
+        <param name="right_coef" value="$(arg right_coef)" />
+        <param name="linear_coef" value="$(arg linear_coef)" />
+        <param name="angular_coef" value="$(arg angular_coef)" />
+        <param name="encoder_ticks_per_rev" value="$(arg encoder_ticks_per_rev)" />
+        <param name="base_width" value="$(arg base_width)" />
+        <param name="wheel_diameter" value="$(arg wheel_diameter)" />
+    </node>
+
+    <!--识别-->
+    <arg name="SVM_DATA_FILE" default="$(find flame_detection)/model/svmdata.xml"/>
+    <param name="SVM_DATA_FILE" value="$(arg SVM_DATA_FILE)"/>
+    <node pkg="flame_detection" type="main" name="flameDetection" />
+    
+    <!--三维空间坐标定位-->
+    <!--是否发现火焰，火焰是否已经熄灭-->
+    
+    <arg name="isFire" default="False" />
+    <param name="isFire" value="$(arg isFire)" type="bool"/>
+    <node name="space_node" pkg="flame_detection" type="3DPosition"/>
+    
+    
+    <!--瞄准与射击-->
+    
+    <arg name="safeZone" default="1.5" />
+    <param name="safeZone" value="$(arg safeZone)" type="double"/>
+    <node name="fighting_node" pkg="achilles_fighting" type="aimming.py" />
+    
+    <!--运行move_base导航-->
+    <!--<include file="$(find achilles_exploring)/launch/move_base.launch" />-->
+    
+    <!--slam建图-->
+    <!--gmapping-->
+    <!--
+    <arg name="scan_topic" default="scan" />
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" >
+        <param name="odom_frame" value="odom"/>
+        <param name="map_update_interval" value="5.0"/>
+        <param name="maxRange" value="12"/>
+        <param name="maxUrange" value="8"/>
+        <param name="sigma" value="0.05"/>
+        <param name="kernelSize" value="1"/>
+        <param name="lstep" value="0.05"/>
+        <param name="astep" value="0.05"/>
+        <param name="iterations" value="5"/>
+        <param name="lsigma" value="0.075"/>
+        <param name="ogain" value="3.0"/>
+        <param name="lskip" value="0"/>
+        <param name="srr" value="0.01"/>
+        <param name="srt" value="0.02"/>
+        <param name="str" value="0.01"/>
+        <param name="stt" value="0.02"/>
+        <param name="linearUpdate" value="0.5"/>
+        <param name="angularUpdate" value="0.436"/>
+        <param name="temporalUpdate" value="-1.0"/>
+        <param name="resampleThreshold" value="0.5"/>
+        <param name="particles" value="80"/>
+
+        <param name="xmin" value="-1.0"/>
+        <param name="ymin" value="-1.0"/>
+        <param name="xmax" value="1.0"/>
+        <param name="ymax" value="1.0"/>
+
+        <param name="delta" value="0.05"/>
+        <param name="llsamplerange" value="0.01"/>
+        <param name="llsamplestep" value="0.01"/>
+        <param name="lasamplerange" value="0.005"/>
+        <param name="lasamplestep" value="0.005"/>
+        <remap from="scan" to="$(arg scan_topic)"/>
+    </node>
+    -->
+    <!--导航点选择-->
+    <!--是否已经停下来去灭火-->
+    <!--
+    <arg name="stopDriveToFight" default="False" />
+    <param name="stopDriveToFight" value="$(arg stopDriveToFight)" type="bool" />
+    <node name="achilles_goals_node" pkg="achilles_exploring" type="achilles_goals.py" output="screen" respawn="true"/>
+    -->
+</launch>
