@@ -1,0 +1,25 @@
+#class (KEYWORD1)
+Equipment		KEYWORD1
+SerialServo     KEYWORD1
+MosSwitch       KEYWORD1
+ 
+#function and method (KEYWORD2)
+info				KEYWORD2
+intToChar		    KEYWORD2
+charToInt 	        KEYWORD2
+clear 		        KEYWORD2
+
+read                KEYWORD2
+write               KEYWORD2
+setPort             KEYWORD2
+getPort             KEYWORD2
+
+Open                KEYWORD2
+Close               KEYWORD2
+
+#constant (LITERAL1)
+from_               LITERAL1
+to_                 LITERAL1
+num_                LITERAL1
+type_               LITERAL1
+data_               LITERAL1

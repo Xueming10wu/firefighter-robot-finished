@@ -1,0 +1,40 @@
+#######################################
+# Syntax Coloring Map MultCode
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MultCode	KEYWORD1	MultCode
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+encode		KEYWORD2
+decode		KEYWORD2
+setFrom		KEYWORD2
+setTo		KEYWORD2
+setNum		KEYWORD2
+setType		KEYWORD2
+setData		KEYWORD2
+
+getFrom		KEYWORD2
+getTo		KEYWORD2
+getNum		KEYWORD2
+getType		KEYWORD2
+getData		KEYWORD2
+
+getFromeSize	KEYWORD2
+getToSize	KEYWORD2
+getNumSize	KEYWORD2
+getTypeSize	KEYWORD2
+getDataSize	KEYWORD2
+getSumSize	KEYWORD2
+
+char_ToInt	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
